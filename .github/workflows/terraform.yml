@@ -1,10 +1,16 @@
 name: Terraform
 
 on:
-  push:
-    branches: [ "main" ]
 
   workflow_dispatch:
+    inputs:
+      action:
+        description: "Select your choice"
+        required: true
+        type: choice
+        options:
+        - apply
+        - destroy
 
 jobs:
   build:
@@ -29,4 +35,4 @@ jobs:
         run: terraform init          
 
       - name: Terraform Apply
-        run: terraform destroy -auto-approve
+        run: terraform apply -auto-approve
